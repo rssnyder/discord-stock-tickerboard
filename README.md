@@ -133,6 +133,12 @@ services:
 docker-compose-up -d
 ```
 
+## v1.0.0 Goal
+
+To reach a stable version 1, my main focus will be enabling dynamic boards, meaning the tickers that cycle through are being dynamically updated by using an API for the stock list vs local file or env.
+
+This should enable things like 'top movers' or other 'stocks of the day' types lists.
+
 ## Support
 
 If you have a request for a new ticker or issues with a current one, please open a github issue or find me on discord at `jonesbooned#1111` or [join the support server](https://discord.gg/CQqnCYEtG7).
