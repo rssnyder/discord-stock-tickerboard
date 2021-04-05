@@ -25,12 +25,15 @@ Single Stock Ticker Bots: https://github.com/rssnyder/discord-stock-ticker
 
 Don't see a board that you need or want to change a current list? Open a github issue/pr or join our discord server!
 
-[![WSB](https://logo.clearbit.com/gamestop.com)](https://discord.com/api/oauth2/authorize?client_id=828417475624435712&permissions=0&scope=bot)
-[![FAANG](https://logo.clearbit.com/gamestop.com)](https://discord.com/api/oauth2/authorize?client_id=828417475624435712&permissions=0&scope=bot)
+[![WSB](https://s3.cloud.rileysnyder.org/public/assets/wsb.jpeg)](https://discord.com/api/oauth2/authorize?client_id=828687744640352347&permissions=0&scope=bot)
+[![FAANG](https://s3.cloud.rileysnyder.org/public/assets/faang.jpeg)](https://discord.com/api/oauth2/authorize?client_id=828687783190331392&permissions=0&scope=bot)
+[![CC](https://s3.cloud.rileysnyder.org/public/assets/cc.jpeg)](https://discord.com/api/oauth2/authorize?client_id=828687818229284874&permissions=0&scope=bot)
 
 ## Premium
 
 For advanced features like faster update times, custom stock lists, and having the price in the Name vs the Activity, you can subscribe to my premuim offering. I will host individual instances for your discord server at a cost of $2/month.
+
+![Discord Board Premium Sidebar w/ Bots](https://s3.cloud.rileysnyder.org/public/assets/sidebar-board-premium.gif)
 
 There is a full logging stack that includes loki & promtail with grafana for visualization.
 
