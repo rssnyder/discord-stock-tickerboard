@@ -1,0 +1,16 @@
+[Unit]
+Description=discord-stock-tickerboard
+Wants=basic.target
+After=basic.target network.target
+Before=sshd.service
+
+[Service]
+SyslogIdentifier=discord-stock-tickerboard
+StandardOutput=syslog
+StandardError=syslog
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart=/etc/discord-stock-ticker/discord-stock-tickerboard
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
