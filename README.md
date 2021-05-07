@@ -43,101 +43,82 @@ If you are interested please see the [contact info on my github page](https://gi
 
 ### Self-Hosting
 
-Install python for your target operating system.
+#### Running in a simple shell
 
-Clone down the repo locally:
-
-```
-git clone git@github.com:rssnyder/discord-stock-tickerboard.git && cd discord-stock-tickerboard
-```
-
-Register a new application in the discord developer portal and copy the bot token:
+Pull down the latest release for your OS [here](https://github.com/rssnyder/discord-stock-tickerboard/releases).
 
 ```
-export DISCORD_BOT_TOKEN=<token>
+wget https://github.com/rssnyder/discord-stock-tickerboard/releases/download/v2.0.0/discord-stock-tickerboard-v2.0.0-linux-amd64.tar.gz
+
+tar zxf discord-stock-tickerboard-v2.0.0-linux-amd64.tar.gz
+
+./discord-stock-tickerboard
 ```
 
-Set your desired list source.
+Add board to the service with an HTTP call:
 
-For custom on-the-fly lists:
 
-```
-export STATIC_LIST=PFG,GME,BB
-```
-
-Or for built in lists that come with the repo (sourced from `builtin.json`):
+Stock Payload: 
 
 ```
-export BUILTIN_LIST=FAANG
+{
+  "name": "Stocks",
+  "frequency": 3,
+  "items": ["PFG", "GME", "AMC"],
+  "token": "xxxxxxxxxxxxxxxxxxxxx",
+  "header": "1. ",  # string/OPTIONAL: adds a header to the nickname to help sort bots
+  "set_nickname": true,  # bool/OPTIONAL: put prices in nickname
+  "set_color": true,  # bool/OPTIONAL: requires set_nickname
+  "arrows": true  # bool/OPTIONAL: show arrows in ticker names
+}
 ```
 
-To change the nickname of the bot instead of the activity (will need change nickname permissions in the server):
+
+Crypto Payload: 
 
 ```
-export SET_NICKNAME=1
-```
-
-If you want to adjust the time between the different stocks:
-
-```
-export FREQUENCY=3
-```
-
-Or if you want to set a static header in front of the bot name:
-
-```
-export NICKNAME_HEADER=1.
-```
-
-Other options:
-
-```
-export LOG_FILE=log.log  # log to file instead of stdout
-```
-
-Once all your options are set, simply install the dependencies and run the bot (virtual environments might be a smart idea):
-
-```
-pip3 install -r requirements.txt
-python3 main.py
-```
-
-### Docker
-
-You can also run these bots using docker. This can make running multiple bots esier. Here is an example docker compose file for the basic feature set (please check for the latest release and update the tags accordingly):
-
-```
----
-version: "2"
-services:
-  tickerboard-custom:
-    image: ghcr.io/rssnyder/discord-stock-tickerboard:0.1.0
-    container_name: tickerboard-custom
-    environment:
-      - DISCORD_BOT_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-      - STATIC_LIST=PFG,GME,BB
-      - SET_NICKNAME=1
-    restart: unless-stopped
-
-  tickerboard-meme:
-    image: ghcr.io/rssnyder/discord-stock-tickerboard:0.1.0
-    container_name: tickerboard-meme
-    environment:
-      - DISCORD_BOT_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-      - BUILTIN_LIST=MEME
-      - SET_NICKNAME=1
-    restart: unless-stopped
+{
+  "name": "Cryptos",
+  "crypto": true,
+  "frequency": 3,
+  "items": ["bitcoin", "ethereum", "dogecoin"],
+  "token": "xxxxxxxxxxxxxxxxxxxxx",
+  "header": "2. ",  # string/OPTIONAL: adds a header to the nickname to help sort bots
+  "set_nickname": true,  # bool/OPTIONAL: put prices in nickname
+  "set_color": true,  # bool/OPTIONAL: requires set_nickname
+  "arrows": true  # bool/OPTIONAL: show arrows in ticker names
+}
 ```
 
 ```
-docker-compose-up -d
+curl -X POST -H "Content-Type: application/json" --data '{
+  "name": "Stocks",
+  "frequency": 3,
+  "set_nickname": true,
+  "set_color": true,
+  "percentage": true,
+  "arrows": true,
+  "discord_bot_token": "xxxxxxx",
+  "items": ["PFG", "GME", "AMC"]
+}' localhost:8080/tickerboard
+
 ```
 
-## v1.0.0 Goal
+#### List current running bots
 
-To reach a stable version 1, my main focus will be enabling dynamic boards, meaning the tickers that cycle through are being dynamically updated by using an API for the stock list vs local file or env.
+```
+curl localhost:8080/tickerboard
+```
 
-This should enable things like 'top movers' or other 'stocks of the day' types lists.
+#### Remove a bot
+
+```
+curl -X DELETE localhost:8080/tickerboard/Stocks
+```
+
+```
+curl -X DELETE localhost:8080/tickerboard/Cryptos
+```
 
 ## Support
 
