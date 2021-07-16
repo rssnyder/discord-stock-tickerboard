@@ -1,5 +1,7 @@
 # discord-stock-tickerboard
 
+⚠️This project has been merged with [discord stock tickers](https://github.com/rssnyder/discord-stock-ticker).⚠️
+
 [![GitHub Super-Linter](https://github.com/rssnyder/discord-stock-tickerboard/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 
